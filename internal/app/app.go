@@ -1,15 +1,18 @@
 package main
 
 import (
-    "fmt"
+    // "fmt"
 _    "html"
     "log"
     "net/http"
-    "database/sql"
+    // "database/sql"
     _ "github.com/go-sql-driver/mysql"
 
     // подключаем handler, uscase, repository
-
+    "messanger/handler"
+    "messanger/repository"
+    "messanger/usecase"
+)
 // CRUD
 // 1) get messages for chat (limit 50) "SELECT * FROM messages WHERE chat_id = 1"
 
@@ -20,7 +23,21 @@ _    "html"
 // 
 
 
+func Run() {
 
+
+    db, _ := sql.Open("mysql", "root:Qwe123??@tcp(127.0.0.1:3306)/messanger")
+    repos := repository.NewRepository(db)
+    usecases := usecase.NewService(repos)
+    handlers := handler.NewHandler(usecase)
+
+    // httpServer := httpserver.New(handler, httpserver.Port(cfg.HTTP.Port))
+
+    http.HandleFunc("/hi", handlers.MessageHandler)
+    // fmt.Println(handler.SayHi())
+
+    log.Fatal(http.ListenAndServe(":8180", nil))
+}
 
 
 func main() {
@@ -28,16 +45,3 @@ func main() {
 
 }
 
-func Run() {
-
-    // messageUseCase := usecase.New(
-    //     repo.New(pg),
-    //     webapi.New(),
-    // )
-
-    // httpServer := httpserver.New(handler, httpserver.Port(cfg.HTTP.Port))
-
-    http.HandleFunc("/hi", HiHandler)
-
-    log.Fatal(http.ListenAndServe(":8180", nil))
-}

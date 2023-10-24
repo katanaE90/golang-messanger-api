@@ -1,6 +1,14 @@
+package handler
 
-func HiHandler(w http.ResponseWriter, r *http.Request) {
-    //        w.Header().Set("Access-Control-Allow-Origin", "*")
+import (
+    "fmt"
+    "net/http"
+    "log"
+    "database/sql"
+    _ "github.com/go-sql-driver/mysql"
+)
+
+func MessageHandler(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
     w.Header().Set("Access-Control-Allow-Origin", "*")
 
@@ -23,14 +31,6 @@ func HiHandler(w http.ResponseWriter, r *http.Request) {
     db.Close()
 }
 
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        w.Header().Set("Content-Type", "application/json")
-        //        w.Header().Set("Access-Control-Allow-Origin", "http: //localhost:3001")
-        w.Header().Set("Access-Control-Allow-Origin", "*")
-        w.Header().Set("Access-Control-Allow-Headers", "*")
-        //        mapD: = map[string]int{"apple": 5, "lettuce": 7}
-        //        mapB, _: = json.Marshal(mapD)
-        //        fmt.Println(string(mapB))
-               fmt.Fprintf(w, "{\"test\": \"test\"}")
-        //        fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
-    })
+// func SayHi() string {
+//     return "hello"
+// }
