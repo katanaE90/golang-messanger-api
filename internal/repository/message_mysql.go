@@ -2,15 +2,16 @@ package repository
 
 import (
 	"messanger/entity"
-_	"database/sql"
+	"database/sql"
+	"log"
     _ "github.com/go-sql-driver/mysql"
 )
 
 type MessageMysql struct {
-	db *mysql.DB
+	db *sql.DB
 }
 
-func NewMessageMysql(db *mysql.DB) *MessageMysql {
+func NewMessageMysql(db *sql.DB) *MessageMysql {
 	return &MessageMysql{db: db}
 }
 
@@ -38,13 +39,14 @@ func NewMessageMysql(db *mysql.DB) *MessageMysql {
 // 	return id, tx.Commit()
 // }
 
-func (r *MessageMysql) GetAll(userId int) ([]entity.Message, error) {
+func (r *MessageMysql) GetAll() ([]entity.Message, error) {
 	var messages []entity.Message
 
+    db, _ := sql.Open("mysql", "root:Qwe123??@tcp(127.0.0.1:3306)/messanger")
 	res, err := db.Query("SELECT * FROM messages")
 
 	for res.Next(){
-		var message Message
+		var message entity.Message
 		err := res.Scan(&message.Id, &message.Text)
 		messages = append(messages, message)
 //	messages["id"] = strconv.Itoa(id)

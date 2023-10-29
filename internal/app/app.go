@@ -2,16 +2,16 @@ package main
 
 import (
     // "fmt"
-    "html"
+    // "html"
     "log"
     "net/http"
-_    "database/sql"
+    "database/sql"
     _ "github.com/go-sql-driver/mysql"
 
     // подключаем handler, uscase, repository
     "messanger/handler"
-// _    "messanger/repository"
-// _    "messanger/usecase"
+    // "messanger/repository"
+    // "messanger/usecase"
 )
 // CRUD
 // 1) get messages for chat (limit 50) "SELECT * FROM messages WHERE chat_id = 1"

@@ -1,12 +1,12 @@
 package repository
 
 import (
-	
+	"messanger/usecase"
 )
 
 type Repository struct {
 	// Authorization
-	Message
+	Message usecase.Mesage
 }
 
 func NewRepository(db *sql.DB) *Repository {
