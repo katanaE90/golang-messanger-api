@@ -1,14 +1,11 @@
 package handler
 
-type UseCase interface {
-	GetClients(ctx context.Context) (interface{}, error)
-	SignIn(ctx context.Context) (interface{}, error)
-	SignUp(ctx context.Context) (interface{}, error)
-	Pong(ctx context.Context) (interface{}, error)
-}
+import (
+	"messanger/usecase"
+)
 
 type Handler struct {
-	uc     UseCase
+	uc     usecase.UseCase
 	//logger logger.Logger
 }
 

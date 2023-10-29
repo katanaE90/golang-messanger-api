@@ -1,9 +1,11 @@
 package usecase
 
-
+import (
+	"messanger/repository"
+)
 
 type MessageUseCase struct {
-	repo repository.Message
+	repo Mesage
 }
 
 func NewMessageUseCase(repo repository.Message) *MessageUseCase {

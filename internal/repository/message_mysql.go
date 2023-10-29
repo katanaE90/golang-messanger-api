@@ -1,14 +1,16 @@
 package repository
 
 import (
-	"entity"
+	"messanger/entity"
+_	"database/sql"
+    _ "github.com/go-sql-driver/mysql"
 )
 
 type MessageMysql struct {
 	db *mysql.DB
 }
 
-func NewMessageMysql(db *sqlx.DB) *MessageMysql {
+func NewMessageMysql(db *mysql.DB) *MessageMysql {
 	return &MessageMysql{db: db}
 }
 
@@ -41,11 +43,21 @@ func (r *MessageMysql) GetAll(userId int) ([]entity.Message, error) {
 
 	res, err := db.Query("SELECT * FROM messages")
 
-	// query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul on tl.id = ul.list_id WHERE ul.user_id = $1",
-		// todoListsTable, usersListsTable)
-	// err := r.db.Select(&lists, query, userId)
+	for res.Next(){
+		var message Message
+		err := res.Scan(&message.Id, &message.Text)
+		messages = append(messages, message)
+//	messages["id"] = strconv.Itoa(id)
+//	messages["text"] = message
 
-	return lists, err
+        if err != nil {
+            log.Fatal(err)
+        }
+        //        fmt.Printf("id: %v; ", message.id)
+        //        fmt.Printf("message: %v\n", message.text)
+    }
+
+	return messages, err
 }
 
 
