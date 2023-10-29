@@ -28,7 +28,7 @@ func Run() {
 
     db, _ := sql.Open("mysql", "root:Qwe123??@tcp(127.0.0.1:3306)/messanger")
     repos := repository.NewRepository(db)
-    usecases := usecase.NewService(repos)
+    usecases := usecase.NewUseCase(repos)
     handlers := handler.NewHandler(usecase)
 
     // httpServer := httpserver.New(handler, httpserver.Port(cfg.HTTP.Port))

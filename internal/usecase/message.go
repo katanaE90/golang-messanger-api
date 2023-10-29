@@ -7,5 +7,5 @@ type MessageUseCase struct {
 }
 
 func NewMessageUseCase(repo repository.Message) *MessageUseCase {
-	return &TodoListService{repo: repo}
+	return &MessageUseCase{repo: repo}
 }

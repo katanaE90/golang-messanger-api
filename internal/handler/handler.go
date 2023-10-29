@@ -9,9 +9,9 @@ type UseCase interface {
 
 type Handler struct {
 	uc     UseCase
-	logger logger.Logger
+	//logger logger.Logger
 }
 
-func NewHandler(uc UseCase, logs logger.Logger) *Handler {
-	return &Handler{uc: uc, logger: logs}
+func NewHandler(uc UseCase) *Handler {
+	return &Handler{uc: uc}
 }

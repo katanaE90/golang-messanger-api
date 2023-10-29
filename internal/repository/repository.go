@@ -20,7 +20,7 @@ type Repository struct {
 	Message
 }
 
-func NewRepository(db *sqlx.DB) *Repository {
+func NewRepository(db *sql.DB) *Repository {
 	return &Repository{
 		// Authorization: NewAuthPostgres(db),
 		Message: NewMessageMysql(db),
