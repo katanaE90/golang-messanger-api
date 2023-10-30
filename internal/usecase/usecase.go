@@ -18,7 +18,7 @@ type Message interface {
 
 type UseCase struct {
 	// Authorization
-	Message
+	Message Message
 }
 
 func NewUseCase(repos *repository.Repository) *UseCase {

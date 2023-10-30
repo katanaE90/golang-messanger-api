@@ -1,13 +1,15 @@
 package usecase
 
 import (
-	"messanger/repository"
+	"messanger/entity"
+	// "messanger/repository"
+	// "messanger/usecase"
 )
 
 type MessageUseCase struct {
-	repo Mesage
+	repo entity.Message
 }
 
-func NewMessageUseCase(repo repository.Message) *MessageUseCase {
+func NewMessageUseCase(repo usecase.Message) *MessageUseCase {
 	return &MessageUseCase{repo: repo}
 }

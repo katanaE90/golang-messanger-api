@@ -9,8 +9,8 @@ import (
     _ "github.com/go-sql-driver/mysql"
 
     // подключаем handler, uscase, repository
-    "messanger/handler"
-    // "messanger/repository"
+    // "messanger/handler"
+    "messanger/repository"
     // "messanger/usecase"
 )
 // CRUD
@@ -27,9 +27,9 @@ func Run() {
 
 
     db, _ := sql.Open("mysql", "root:Qwe123??@tcp(127.0.0.1:3306)/messanger")
-    // repos := repository.NewRepository(db)
+     repos := repository.NewRepository(db)
     // usecases := usecase.NewUseCase(repos)
-    handlers := handler.NewHandler(usecase)
+    //handlers := handler.NewHandler(usecase)
 
     // httpServer := httpserver.New(handler, httpserver.Port(cfg.HTTP.Port))
 
