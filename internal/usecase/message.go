@@ -6,10 +6,17 @@ import (
 	// "messanger/usecase"
 )
 
-type MessageUseCase struct {
-	repo entity.Message
+
+type Message interface {
+	GetAll() ([]entity.Message, error)
 }
 
-func NewMessageUseCase(repo usecase.Message) *MessageUseCase {
-	return &MessageUseCase{repo: repo}
+type MessageUseCase struct {
+	Message
+}
+
+
+
+func NewMessageUseCase(repo Message) *MessageUseCase {
+	return &MessageUseCase{Message: repo}
 }

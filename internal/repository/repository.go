@@ -1,13 +1,19 @@
 package repository
 
 import (
-	"messanger/usecase"
+	// "messanger/usecase"
+	"messanger/entity"
     "database/sql"
 )
 
+type Message interface {
+	GetAll() ([]entity.Message, error)
+}
+
+
 type Repository struct {
 	// Authorization
-	usecase.Message
+	Message
 }
 
 func NewRepository(db *sql.DB) *Repository {

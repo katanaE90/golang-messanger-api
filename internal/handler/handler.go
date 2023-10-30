@@ -1,14 +1,20 @@
 package handler
 
-// import (
-// 	"messanger/usecase"
-// )
+import (
+	// "fmt"
+    // "net/http"
+	"messanger/usecase"
+)
 
-// type Handler struct {
-// 	uc     usecase.UseCase
-// 	//logger logger.Logger
-// }
+type Handler struct {
+	uc     *usecase.UseCase
+	//logger logger.Logger
+}
 
-// func NewHandler(uc usecase.UseCase) *Handler {
-// 	return &Handler{uc: uc}
+func NewHandler(uc *usecase.UseCase) *Handler {
+	return &Handler{uc: uc}
+}
+
+// func (h *Handler) MessageHandler(w http.ResponseWriter, r *http.Request) {
+//     fmt.Fprintf(w, "{\"test\": \"test\"}")
 // }
