@@ -8,6 +8,9 @@ import (
 
 type Message interface {
 	GetAll() ([]entity.Message, error)
+	Create() (int, error)
+	Update(id int, message string) (int, error)
+	Delete(id int) (error)
 }
 
 

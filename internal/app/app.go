@@ -4,8 +4,7 @@ import (
     // "reflect"
     // "fmt"
     // "html"
-    "log"
-    "net/http"
+    // "net/http"
     "database/sql"
     _ "github.com/go-sql-driver/mysql"
 
@@ -27,10 +26,13 @@ import (
 func Run() {
 
 
-    db, _ := sql.Open("mysql", "root:Qwe123??@tcp(127.0.0.1:3306)/messanger")
+    db, _ := sql.Open("mysql", "root:Qwe123??@tcp(127.0.0.1:3306)/messanger")//use config
     repos := repository.NewRepository(db)
     usecases := usecase.NewUseCase(repos)
     handlers := handler.NewHandler(usecases)
+    handler.NewRouter(handlers)
+
+
 
     // httpServer := httpserver.New(handler, httpserver.Port(cfg.HTTP.Port))
     // fmt.Println(handlers)
@@ -39,10 +41,7 @@ func Run() {
     // fmt.Println(reflect.TypeOf(handlers.MessageHandler))
     
 
-    http.HandleFunc("/messages", handlers.GetAll)
-    // fmt.Println(handler.SayHi())
 
-    log.Fatal(http.ListenAndServe(":8180", nil))
 }
 
 
