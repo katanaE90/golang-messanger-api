@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"messanger/entity"
+	"messanger/internal/entity"
 	"database/sql"
 	"log"
     _ "github.com/go-sql-driver/mysql"
@@ -37,11 +37,11 @@ func (repo *MessageMysql) GetAll() ([]entity.Message, error) {
 
 
 
-func (repo *MessageMysql) Create() (int, error) {
+func (repo *MessageMysql) Create(message string) (int, error) {
 	var id int
 
 	query := "INSERT INTO `messages` (`message`) VALUES (?)"
-	res, err := repo.db.ExecContext(context.Background(),query, "John Doe")
+	res, err := repo.db.ExecContext(context.Background(),query, message)
 
 	resId, err := res.LastInsertId()
 	id = int(resId)
@@ -54,7 +54,6 @@ func (repo *MessageMysql) Create() (int, error) {
 }
 
 
-// что возвращает?
 func (repo *MessageMysql) Update(id int, message string) (int, error) {
 	query := "UPDATE messages SET message=? WHERE id=?"
 	res, err := repo.db.ExecContext(context.Background(),query, message, id)
@@ -79,9 +78,3 @@ func (repo *MessageMysql) Delete(id int) (error) {
 
 	return err
 }
-
-// func (repo *MessageMysql) Update(id int) (error) {
-// 	_, err := repo.db.Query("INSERT INTO messages")
-
-// 	return err
-// }

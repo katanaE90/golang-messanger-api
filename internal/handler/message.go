@@ -6,18 +6,12 @@ import (
     "encoding/json"
     "strconv"
     "log"
-    // "database/sql"
-    // _ "github.com/go-sql-driver/mysql"
+    "strings"
 )
 
 
 
 func (h *Handler) GetAll(w http.ResponseWriter, r *http.Request) {
-    if r.Method != "GET" {
-        // business as usual
-        // h.fs.ServeHTTP(w, r)
-        return
-    }
     w.Header().Set("Content-Type", "application/json")
     w.Header().Set("Access-Control-Allow-Origin", "*")
 
@@ -33,8 +27,9 @@ func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "text/html;charset=utf-8")
     w.Header().Set("Access-Control-Allow-Origin", "*")
 
-    id, _ := h.uc.Message.Create()
-    // jsonMessages, _ := json.Marshal(messages)
+    r.ParseForm()
+    message := r.Form.Get("message")
+    id, _ := h.uc.Message.Create(message)
     fmt.Fprintf(w, strconv.Itoa(id))
 }
 
@@ -44,16 +39,19 @@ func (h *Handler) Update(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
     w.Header().Set("Access-Control-Allow-Origin", "*")
 
-    id, err := strconv.Atoi(r.URL.Query().Get("id"))
+    params := strings.Split(r.URL.Path, "/")
+    id, err := strconv.Atoi(params[len(params)-1])
 
     res := "{\"status\": \"success\"}"
     if err != nil {
         log.Fatal(err)
         res = "{\"status\": \"error\"}"
     }
-    message := r.URL.Query().Get("message")
+    r.ParseForm()
+    message := r.Form.Get("message")
 
     id, _ = h.uc.Message.Update(id, message)
+    fmt.Println(id) 
     fmt.Println(id) 
     fmt.Fprintf(w, res) 
 }
@@ -62,7 +60,10 @@ func (h *Handler) Delete(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
     w.Header().Set("Access-Control-Allow-Origin", "*")
 
-    id, err := strconv.Atoi(r.URL.Query().Get("id"))
+    params := strings.Split(r.URL.Path, "/")
+
+    id, err := strconv.Atoi(params[len(params)-1])
+
     fmt.Println(id)
     res := "{\"status\": \"success\"}"
 

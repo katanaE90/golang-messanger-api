@@ -3,7 +3,7 @@ package handler
 import (
 	// "fmt"
     // "net/http"
-	"messanger/usecase"
+	"messanger/internal/usecase"
 )
 
 type Handler struct {
